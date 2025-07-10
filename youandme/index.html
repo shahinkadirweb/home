@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Love Story</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      width: 100%;
+      padding: 35px 40px;
+      text-align: center;
+    }
+
+    .photo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .photo-box {
+      text-align: center;
+      position: relative;
+      filter: drop-shadow(0 0 15px rgba(255, 192, 203, 0.7));
+      transition: transform 0.3s ease;
+    }
+    .photo-box:hover {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 25px rgba(255, 105, 180, 0.9));
+    }
+
+    .photo-box img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 192, 203, 0.7);
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.9);
+    }
+
+    .name {
+      margin-top: 12px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #ffb6c1;
+      text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+      user-select: none;
+    }
+
+    /* Love heart icon between photos */
+    .love-icon {
+      width: 48px;
+      height: 48px;
+      fill: #ff6396;
+      filter: drop-shadow(0 0 5px #ff6396);
+      user-select: none;
+      /* small bounce animation */
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Relation and date plain text, no box */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin: 30px auto 10px;
+      max-width: 350px;
+      color: #ffe4e1;
+      text-shadow: 0 0 8px rgba(255, 182, 193, 0.9);
+      user-select: none;
+    }
+
+    /* Count-up container */
+    .count-up {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .count-box {
+      width: 75px;
+      padding: 10px 0;
+      background: rgba(255, 182, 193, 0.15);
+      border-radius: 18px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+      cursor: default;
+      transition: box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .count-box:hover {
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+    }
+
+    .count-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #ffd1dc;
+      text-shadow: 0 0 4px rgba(255, 182, 193, 0.8);
+    }
+
+    .count-value {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.3rem;
+      color: #fff0f5;
+      font-weight: 700;
+      margin-top: 4px;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.9);
+    }
+
+    /* Quote styling without box */
+    .quote {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      font-style: italic;
+      max-width: 720px;
+      margin: 45px auto 0;
+      color: #ffe4e1;
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      user-select: none;
+      min-height: 72px;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.9);
+    }
+    .quote.show {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .photo-box img {
+        width: 110px;
+        height: 110px;
+      }
+      .name {
+        font-size: 1.7rem;
+      }
+      .section-title {
+        font-size: 1.3rem;
+        max-width: 150px;
+      }
+      .count-box {
+        width: 10px;
+        padding: 10px 0;
+      }
+      .count-label {
+        font-size: 0.85rem;
+      }
+      .count-value {
+        font-size: 1.1rem;
+      }
+      .quote {
+        font-size: 1.2rem;
+        max-width: 90%;
+        margin: 40px auto 0;
+      }
+      .love-icon {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="photo-row" aria-label="Couple photos with love icon between">
+      <div class="photo-box">
+        <img src="rafid.jpg" alt="King" />
+        <div class="name">Rafid</div>
+      </div>
+
+      <!-- Love heart SVG icon -->
+      <svg class="love-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42
+                 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81
+                 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4
+                 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+
+      <div class="photo-box">
+        <img src="noor.jpg" alt="Queen" />
+        <div class="name">Noor</div>
+      </div>
+    </div>
+
+    <div class="section-title">Married</div>
+    <div class="section-title">03 May 2025</div>
+
+    <div class="count-up" aria-label="Time together count up">
+      <div class="count-box" role="presentation">
+        <div class="count-label">Years</div>
+        <div class="count-value" id="years">0</div>
+      </div>
+      <div class="count-box" role="presentation">
+        <div class="count-label">Months</div>
+        <div class="count-value" id="months">0</div>
+      </div>
+      <div class="count-box" role="presentation">
+        <div class="count-label">Days</div>
+        <div class="count-value" id="days">0</div>
+      </div>
+      <div class="count-box" role="presentation">
+        <div class="count-label">Hours</div>
+        <div class="count-value" id="hours">0</div>
+      </div>
+      <div class="count-box" role="presentation">
+        <div class="count-label">Minutes</div>
+        <div class="count-value" id="minutes">0</div>
+      </div>
+      <div class="count-box" role="presentation">
+        <div class="count-label">Seconds</div>
+        <div class="count-value" id="seconds">0</div>
+      </div>
+    </div>
+
+    <div class="quote" id="quote" aria-live="polite" aria-atomic="true">Loading quote...</div>
+  </div>
+
+  <script>
+    // Background random on load
+    const bgIndex = Math.floor(Math.random() * 11);
+    document.body.style.backgroundImage = `url('bg${bgIndex}.jpg')`;
+
+    // Quotes array
+    const quotes = [
+      "Together is a beautiful place to be.",
+      "You are the reason I believe in love.",
+      "Every love story is beautiful, but ours is my favorite.",
+      "Still falling for you every single day.",
+      "I didn’t choose you. My heart did.",
+      "You complete me in every way.",
+      "Forever is just the beginning.",
+      "You make every moment magical.",
+      "With you, I found home.",
+      "You're my today and all my tomorrows."
+    ];
+
+    const quoteEl = document.getElementById('quote');
+    let quoteIndex = 0;
+
+    function showQuote(index) {
+      quoteEl.classList.remove('show');
+      setTimeout(() => {
+        quoteEl.textContent = quotes[index];
+        quoteEl.classList.add('show');
+      }, 600);
+    }
+
+    function cycleQuotes() {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      showQuote(quoteIndex);
+    }
+
+    // Initialize first quote
+    showQuote(quoteIndex);
+    // Rotate every 10 seconds
+    setInterval(cycleQuotes, 10000);
+
+    // Count-up time calculation
+    const startDate = new Date("2025-05-03T00:00:00");
+
+    function updateCountUp() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      let seconds = Math.floor(diff / 1000);
+      let minutes = Math.floor(seconds / 60);
+      let hours = Math.floor(minutes / 60);
+      let days = Math.floor(hours / 24);
+
+      const years = Math.floor(days / 365);
+      days %= 365;
+
+      const months = Math.floor(days / 30);
+      days %= 30;
+
+      hours %= 24;
+      minutes %= 60;
+      seconds %= 60;
+
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    updateCountUp();
+    setInterval(updateCountUp, 1000);
+  </script>
+</body>
+</html>
